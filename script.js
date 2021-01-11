@@ -15,87 +15,105 @@ var specialChars = ["@", "%", "+", "\\", "/", "'", "!", "#", "$", "^", "?", ":",
 
 // WHEN prompted for the length of the password
 // THEN I choose a length of at least 8 characters and no more than 128 characters
-var lengthPrompt = function () {
-    var passwordLength = window.prompt("Length of password?")
-    if (passwordLength < 8) {
-        window.alert("Your password must be at least 8 characters long!")
-        lengthPrompt()
-    } else if (passwordLength > 128) {
-        window.alert("Your password cannot be longer than 128 characters!")
-        lengthPrompt()
-    } else if (isNaN(passwordLength)) {
-        window.alert("Please enter a number between 8 and 128")
-        lengthPrompt()
+function getpasswordLength() {
+    var length = parseInt(
+        prompt("Length of password?")
+    )
+
+    if (length < 8) {
+        alert("Your password must be at least 8 characters long!")
+        getpasswordLength()
+        return;
     }
-    return;
+    if (length > 128) {
+        alert("Your password cannot be longer than 128 characters!")
+        getpasswordLength()
+        return;
+    }
+    if (isNaN(length)) {
+        alert("Please enter a number between 8 and 128")
+        getpasswordLength()
+        return;
+    }
+    return length;
 }
 
-// WHEN prompted for character types to include in the password
-// THEN I choose lowercase, uppercase, numeric, and/or special characters
-var charSelect = function () {
-    var includeLowercase = window.confirm("Click \OK\ to include lower case letters")
-    var includeUppercase = window.confirm("Click \OK\ to include Upper case letters")
-    var includeNumbers = window.confirm("Click \OK\ to include numbers")
-    var includeSpecial = window.confirm("Click \OK\ to include special characters")
+function getuserChoises() {
+    var passwordLength = getpasswordLength()
+
+    // WHEN prompted for character types to include in the password
+    // THEN I choose lowercase, uppercase, numeric, and/or special characters
+    var includeLowercase = confirm("Click \OK\ to include lower case letters");
+    var includeUppercase = confirm("Click \OK\ to include Upper case letters");
+    var includeNumbers = confirm("Click \OK\ to include numbers");
+    var includeSpecial = confirm("Click \OK\ to include special characters");
+
     if (
         includeLowercase === false &&
         includeUppercase === false &&
         includeNumbers === false &&
         includeSpecial === false
     ) {
-        window.alert("You must select at least one character type");
-        charSelect()
+        alert("You must select at least one character type");
         return;
     }
+    var userChoises = {
+        passwordLength: passwordLength,
+        includeLowercase: includeLowercase,
+        includeUppercase: includeUppercase,
+        includeNumbers: includeNumbers,
+        includeSpecial: includeSpecial
+    };
+    return userChoises;
+
 }
 
-function generateLower() {
-    lowercaseChars[Math.floor(Math.random() * lowercaseChars.length)]
-}
-function generateUpper() {
-    uppercaseChars[Math.floor(Math.random() * uppercaseChars.length)]
-}
-function generateNumber() {
-    numericChars[Math.floor(Math.random() * numericChars.length)]
-}
-function generateSpecial() {
-    specialChars[Math.floor(Math.random() * specialChars.length)]
-}
+
+
 // WHEN I click the button to generate a password
 // THEN I am presented with a series of prompts for password criteria
 function generatePassword() {
     // WHEN prompted for password criteria
     // THEN I select which criteria to include in the password
-    lengthPrompt()
+    var parameters = getuserChoises();
 
-    charSelect()
+    var result = []
 
-    for (i = 0; i <= passwordLength; i++) {
-        if (includeLowercase = true) {
-            generateLower()
-        } else {
+    // create an array with all possible characters
+    var possibleChars = [possibleLower + possibleUpper + possibleNumber + possibleSpecial];
 
-        }
-        //check
-        if (includeUppercase = true) {
-            generateUpper()
-        } else {
-
-        }
-        //check
-        if (includeNumbers = true) {
-            generateNumber()
-        } else {
-
-        }
-        //check
-        if (includeSpecial = true) {
-            generateSpecial()
-        } else {
-
-        }
-        check
+    if (parameters.includeLowercase = true) {
+        possibleLower = lowercaseChars
+    } else {
+        possibleLower = null
     }
+
+    if (parameters.includeUppercase = true) {
+        possibleUpper = uppercaseChars
+    } else {
+        possibleUpper = null
+    }
+
+    if (parameters.includeNumbers = true) {
+        possibleNumber = numericChars
+    } else {
+        possibleNumber = null
+    }
+
+    if (parameters.includeSpecial = true) {
+        possibleSpecial = specialChars
+    } else {
+        possibleSpecial = null
+    }
+
+    // Pick a random character from within the concatenated array
+    for (var i = 0; i <= parameters.passwordLength; i++) {
+        var randomCharacter = possibleChars[Math.floor(Math.random() * possibleChars.length)]
+
+        result.push(randomCharacter);
+    }
+
+    return result.join("");
 }
 
 
@@ -117,4 +135,4 @@ generateBtn.addEventListener("click", writePassword);
 // THEN a password is generated that matches the selected criteria
 // WHEN the password is generated
 // THEN the password is either displayed in an alert or written to the page
-// ```
+
