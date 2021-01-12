@@ -10,36 +10,38 @@ var specialChars = ["@", "%", "+", "\\", "/", "'", "!", "#", "$", "^", "?", ":",
 
 // Prompt the user to enter a password length
 function getpasswordLength() {
-    var length = parseInt(
+    var passwordLength = parseInt(
         prompt("Length of password?")
-    )
+    );
+
     //make sure they entered a number greater than 8
-    if (length < 8) {
+    if (passwordLength < 8) {
         alert("Your password must be at least 8 characters long!")
         getpasswordLength()
         return;
-    }
+    };
+
     //make sure they entered a number less than 128
-    if (length > 128) {
+    if (passwordLength > 128) {
         alert("Your password cannot be longer than 128 characters!")
         getpasswordLength()
         return;
-    }
+    };
+
     //make sure what they entered is a number
-    if (isNaN(length)) {
+    if (isNaN(passwordLength)) {
         alert("Please enter a number between 8 and 128")
         getpasswordLength()
         return;
-    }
+    };
+    console.log(passwordLength);
     //make sure the function returns a number equal to the length of the password requested
-    return length;
+    return passwordLength;
 }
 
 //collect the user's choices
 function getuserChoices() {
 
-    //bring the password length
-    var passwordLength = getpasswordLength()
 
     //prompt to confirm the use of each type of character
     var includeLowercase = confirm("Click \OK\ to include lower case letters");
@@ -55,20 +57,21 @@ function getuserChoices() {
         includeSpecial === false
     ) {
         alert("You must select at least one character type");
+        getuserChoices();
         return;
-    }
+    };
 
     //create an object containing all the user choises
-    var userChoises = {
-        passwordLength: passwordLength,
+    var userChoices = {
         includeLowercase: includeLowercase,
         includeUppercase: includeUppercase,
         includeNumbers: includeNumbers,
         includeSpecial: includeSpecial
     };
 
+    console.log(userChoices);
     //make sure this function returns all the choices
-    return userChoises;
+    return userChoices;
 
 }
 
@@ -77,7 +80,10 @@ function getuserChoices() {
 //primary function: create a new password using all of the input criteria
 function generatePassword() {
 
-    //run the function that gets all the input
+    //run the function that gets passord length
+    var passwordLength = getpasswordLength();
+
+    //run the function that gets user choices
     var parameters = getuserChoices();
 
     //based on the user's choices, make an array that contains all possible characters
@@ -85,37 +91,37 @@ function generatePassword() {
     //to make sure that at least one of each chosen type is included.
 
     // create an array to store the chosen character types
-    var possible = []
+    var possible = [];
 
     //create an array for characters that must be included
-    var required = []
+    var required = [];
 
     //create an array for the characters that will be the new password
-    var result = []
+    var result = [];
 
     //if the user chose lowercase characters,
-    if (parameters.includeLowercase) {
+    if (parameters.includeLowercase === true) {
         //add all lowercase characters to the possibles array,
         possible = possible.concat(lowercaseChars);
         //and add one random lowercase character to the required array.
         required.push(lowercaseChars[Math.floor(Math.random() * lowercaseChars.length)]);
-    }
+    };
 
     //if the user chose upper case characters,
-    if (parameters.includeUppercase) {
+    if (parameters.includeUppercase === true) {
         //add all upper case characters to the possibles array,
         possible = possible.concat(uppercaseChars);
         //and add one random uppercase character to the required array.
         required.push(uppercaseChars[Math.floor(Math.random() * uppercaseChars.length)]);
-    }
+    };
 
     //if the user chose numbers,
-    if (parameters.includeNumbers) {
+    if (parameters.includeNumbers === true) {
         //add all numbers to the possibles array,
         possible = possible.concat(numericChars);
         //and add one random number to the required array.
         required.push(numericChars[Math.floor(Math.random() * numericChars.length)]);
-    }
+    };
 
     //if the user chose special characters
     if (parameters.includeSpecial === true) {
@@ -123,21 +129,21 @@ function generatePassword() {
         possible = possible.concat(specialChars);
         //and add one random special character to the required array.
         required.push(specialChars[Math.floor(Math.random() * specialChars.length)]);
-    }
+    };
 
 
     // Pick a random character from within the possibles array 
     //as many times as the password length requires,
-    for (var i = 0; i < parameters.passwordLength; i++) {
+    for (var i = 0; i < passwordLength; i++) {
         var randomCharacter = possible[Math.floor(Math.random() * possible.length)]
         //and add it to the results array.
         result.push(randomCharacter);
-    }
+    };
 
     // Mix in at least one of each guaranteed character in the result
     for (var i = 0; i < required.length; i++) {
         result[i] = required[i];
-    }
+    };
     //make the results array into a string of characters
     //and make it the return of this function.
     return result.join("");
