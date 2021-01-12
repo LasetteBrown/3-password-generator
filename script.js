@@ -1,5 +1,3 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
 
 // Create variable arrays for character sets
 var lowercaseChars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -38,7 +36,10 @@ function getpasswordLength() {
     return length;
 }
 
+// WHEN prompted for password criteria
+// THEN I select which criteria to include in the password
 function getuserChoises() {
+
     var passwordLength = getpasswordLength()
 
     // WHEN prompted for character types to include in the password
@@ -48,6 +49,8 @@ function getuserChoises() {
     var includeNumbers = confirm("Click \OK\ to include numbers");
     var includeSpecial = confirm("Click \OK\ to include special characters");
 
+    // WHEN I answer each prompt
+    // THEN my input should be validated and at least one character type should be selected
     if (
         includeLowercase === false &&
         includeUppercase === false &&
@@ -70,52 +73,81 @@ function getuserChoises() {
 
 
 
-// WHEN I click the button to generate a password
-// THEN I am presented with a series of prompts for password criteria
+
 function generatePassword() {
-    // WHEN prompted for password criteria
-    // THEN I select which criteria to include in the password
+
+    // WHEN I click the button to generate a password
+    // THEN I am presented with a series of prompts for password criteria
     var parameters = getuserChoises();
 
+
+    // WHEN all prompts are answered
+    // THEN a password is generated that matches the selected criteria
+
+
+    // create an array with possible characters
+    var possibleChars = []
+
+    //create an array for the result
     var result = []
 
-    // create an array with all possible characters
-    var possibleChars = [possibleLower + possibleUpper + possibleNumber + possibleSpecial];
+    //create an array for required characters
+    var required = []
 
-    if (parameters.includeLowercase = true) {
-        possibleLower = lowercaseChars
+    //add appropriate variables to the array
+    if (parameters.includeLowercase === true) {
+        possibleChars = possibleChars.concat(lowercaseChars);
+        required.push(lowercaseChars[Math.floor(Math.random() * lowercaseChars.length)]);
     } else {
-        possibleLower = null
+
     }
 
-    if (parameters.includeUppercase = true) {
-        possibleUpper = uppercaseChars
+    if (parameters.includeUppercase === true) {
+        possibleChars = possibleChars.concat(uppercaseChars);
+        required.push(uppercaseChars[Math.floor(Math.random() * uppercaseChars.length)]);
     } else {
-        possibleUpper = null
+
     }
 
-    if (parameters.includeNumbers = true) {
-        possibleNumber = numericChars
+    if (parameters.includeNumbers === true) {
+        possibleChars = possibleChars.concat(numericChars);
+        required.push(numericChars[Math.floor(Math.random() * numericChars.length)]);
     } else {
-        possibleNumber = null
+
     }
 
-    if (parameters.includeSpecial = true) {
-        possibleSpecial = specialChars
+    if (parameters.includeSpecial === true) {
+        possibleChars = possibleChars.concat(specialChars);
+        required.push(specialChars[Math.floor(Math.random() * specialChars.length)]);
     } else {
-        possibleSpecial = null
+
     }
+
 
     // Pick a random character from within the concatenated array
-    for (var i = 0; i <= parameters.passwordLength; i++) {
+
+    for (var i = 0; i < parameters.passwordLength; i++) {
         var randomCharacter = possibleChars[Math.floor(Math.random() * possibleChars.length)]
 
         result.push(randomCharacter);
     }
 
+    // Mix in at least one of each guaranteed character in the result
+    for (var i = 0; i < required.length; i++) {
+        result[i] = required[i];
+    }
+
     return result.join("");
 }
 
+// WHEN the password is generated
+// THEN the password is either displayed in an alert or written to the page
+
+
+
+
+// Assignment Code
+var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
@@ -129,10 +161,7 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-// WHEN I answer each prompt
-// THEN my input should be validated and at least one character type should be selected
-// WHEN all prompts are answered
-// THEN a password is generated that matches the selected criteria
-// WHEN the password is generated
-// THEN the password is either displayed in an alert or written to the page
+
+
+
 
