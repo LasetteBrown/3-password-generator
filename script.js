@@ -14,34 +14,42 @@ function getpasswordLength() {
         prompt("Length of password?")
     );
 
-    //make sure they entered a number greater than 8
-    if (passwordLength < 8) {
-        alert("Your password must be at least 8 characters long!")
-        getpasswordLength()
+    //allow the cancel button to cancel out of the process
+    if (passwordLength === null || passwordLength === "" || passwordLength === undefined) {
         return;
-    };
-
-    //make sure they entered a number less than 128
-    if (passwordLength > 128) {
-        alert("Your password cannot be longer than 128 characters!")
-        getpasswordLength()
-        return;
-    };
+    }
 
     //make sure what they entered is a number
-    if (isNaN(passwordLength)) {
-        alert("Please enter a number between 8 and 128")
-        getpasswordLength()
+    else if (isNaN(passwordLength)) {
+        alert("Please enter a number between 8 and 128");
+        getpasswordLength();
         return;
-    };
-    console.log(passwordLength);
-    //make sure the function returns a number equal to the length of the password requested
-    return passwordLength;
+    }
+
+    //make sure they entered a number greater than 8
+    else if (passwordLength < 8) {
+        alert("Your password must be at least 8 characters long!");
+        getpasswordLength();
+        return;
+    }
+
+    //make sure they entered a number less than 128
+    else if (passwordLength > 128) {
+        alert("Your password cannot be longer than 128 characters!");
+        getpasswordLength();
+        return;
+    }
+
+    else {
+
+        console.log(passwordLength);
+        //make sure the function returns a number equal to the length of the password requested
+        return passwordLength;
+    }
 }
 
 //collect the user's choices
 function getuserChoices() {
-
 
     //prompt to confirm the use of each type of character
     var includeLowercase = confirm("Click \OK\ to include lower case letters");
@@ -59,19 +67,22 @@ function getuserChoices() {
         alert("You must select at least one character type");
         getuserChoices();
         return;
-    };
+    }
 
-    //create an object containing all the user choises
-    var userChoices = {
-        includeLowercase: includeLowercase,
-        includeUppercase: includeUppercase,
-        includeNumbers: includeNumbers,
-        includeSpecial: includeSpecial
-    };
+    else {
 
-    console.log(userChoices);
-    //make sure this function returns all the choices
-    return userChoices;
+        //create an object containing all the user choises
+        var userChoices = {
+            includeLowercase: includeLowercase,
+            includeUppercase: includeUppercase,
+            includeNumbers: includeNumbers,
+            includeSpecial: includeSpecial
+        };
+
+        console.log(userChoices);
+        //make sure this function returns all the choices
+        return userChoices;
+    }
 
 }
 
@@ -85,6 +96,16 @@ function generatePassword() {
 
     //run the function that gets user choices
     var parameters = getuserChoices();
+
+    //check to make sure variable have values
+    if (passwordLength === null ||
+        passwordLength === "" ||
+        passwordLength === undefined ||
+        parameters === undefined ||
+        parameters === null ||
+        parameters === "") {
+        return;
+    }
 
     //based on the user's choices, make an array that contains all possible characters
     //and make an array that contains one random character of the chosen type
@@ -130,7 +151,6 @@ function generatePassword() {
         //and add one random special character to the required array.
         required.push(specialChars[Math.floor(Math.random() * specialChars.length)]);
     };
-
 
     // Pick a random character from within the possibles array 
     //as many times as the password length requires,
