@@ -22,27 +22,28 @@ function getpasswordLength() {
     //make sure what they entered is a number
     else if (isNaN(passwordLength)) {
         alert("Please enter a number between 8 and 128");
-        getpasswordLength();
+        passwordLength = getpasswordLength();
         return;
     }
 
     //make sure they entered a number greater than 8
     else if (passwordLength < 8) {
         alert("Your password must be at least 8 characters long!");
-        getpasswordLength();
+        passwordLength = getpasswordLength();
         return;
     }
 
     //make sure they entered a number less than 128
     else if (passwordLength > 128) {
         alert("Your password cannot be longer than 128 characters!");
-        getpasswordLength();
+        passwordLength = getpasswordLength();
         return;
     }
 
     else {
 
         console.log(passwordLength);
+
         //make sure the function returns a number equal to the length of the password requested
         return passwordLength;
     }
@@ -52,8 +53,8 @@ function getpasswordLength() {
 function getuserChoices() {
 
     //prompt to confirm the use of each type of character
-    var includeLowercase = confirm("Click \OK\ to include lower case letters");
-    var includeUppercase = confirm("Click \OK\ to include Upper case letters");
+    var includeLowercase = confirm("Click \OK\ to include lowercase letters");
+    var includeUppercase = confirm("Click \OK\ to include Uppercase letters");
     var includeNumbers = confirm("Click \OK\ to include numbers");
     var includeSpecial = confirm("Click \OK\ to include special characters");
 
@@ -65,7 +66,6 @@ function getuserChoices() {
         includeSpecial === false
     ) {
         alert("You must select at least one character type");
-        getuserChoices();
         return;
     }
 
@@ -126,6 +126,7 @@ function generatePassword() {
         possible = possible.concat(lowercaseChars);
         //and add one random lowercase character to the required array.
         required.push(lowercaseChars[Math.floor(Math.random() * lowercaseChars.length)]);
+        console.log(possible);
     };
 
     //if the user chose upper case characters,
@@ -134,6 +135,8 @@ function generatePassword() {
         possible = possible.concat(uppercaseChars);
         //and add one random uppercase character to the required array.
         required.push(uppercaseChars[Math.floor(Math.random() * uppercaseChars.length)]);
+        console.log(possible);
+
     };
 
     //if the user chose numbers,
@@ -142,6 +145,7 @@ function generatePassword() {
         possible = possible.concat(numericChars);
         //and add one random number to the required array.
         required.push(numericChars[Math.floor(Math.random() * numericChars.length)]);
+        console.log(possible);
     };
 
     //if the user chose special characters
@@ -150,6 +154,7 @@ function generatePassword() {
         possible = possible.concat(specialChars);
         //and add one random special character to the required array.
         required.push(specialChars[Math.floor(Math.random() * specialChars.length)]);
+        console.log(possible);
     };
 
     // Pick a random character from within the possibles array 
@@ -166,6 +171,8 @@ function generatePassword() {
     };
     //make the results array into a string of characters
     //and make it the return of this function.
+    console.log(result);
+    console.log(required);
     return result.join("");
 }
 
