@@ -10,34 +10,34 @@ var specialChars = ["@", "%", "+", "\\", "/", "'", "!", "#", "$", "^", "?", ":",
 
 // Prompt the user to enter a password length
 function getpasswordLength() {
-    var chosenLength = parseInt(
-        prompt("Length of password?")
-    );
+    var chosenLength = prompt("Length of password?");
 
     //allow the cancel button to cancel out of the process
-    if (chosenLength === null || chosenLength === "" || chosenLength === undefined) {
+    if (chosenLength === null) {
+        console.log("nothing's there!");
+        console.log(chosenLength);
+
         return null;
     }
 
     //make sure what they entered is a number
     else if (isNaN(chosenLength)) {
         alert("Please enter a number between 8 and 128");
-        chosenLength = getpasswordLength();
-        return null;
+        console.log("wrong value");
+        console.log(chosenLength);
+        return getpasswordLength();
     }
 
     //make sure they entered a number greater than 8
     else if (chosenLength < 8) {
         alert("Your password must be at least 8 characters long!");
-        chosenLength = getpasswordLength();
-        return null;
+        return getpasswordLength();
     }
 
     //make sure they entered a number less than 128
     else if (chosenLength > 128) {
         alert("Your password cannot be longer than 128 characters!");
-        chosenLength = getpasswordLength();
-        return null;
+        return getpasswordLength();
     }
 
 
@@ -45,63 +45,69 @@ function getpasswordLength() {
     console.log(chosenLength);
 
     //make sure the function returns a number equal to the length of the password requested
-    return chosenLength;
+    return parseInt(chosenLength);
 
 }
 
 //collect the user's choices
 function getuserChoices() {
 
-    //prompt to confirm the use of each type of character
-    var includeLowercase = confirm("Click \OK\ to include lowercase letters");
-    var includeUppercase = confirm("Click \OK\ to include Uppercase letters");
-    var includeNumbers = confirm("Click \OK\ to include numbers");
-    var includeSpecial = confirm("Click \OK\ to include special characters");
+    //run the function that gets passord length
+    var passwordLength = getpasswordLength();
 
-    //make sure the user selected at least one character type
-    if (
-        includeLowercase === false &&
-        includeUppercase === false &&
-        includeNumbers === false &&
-        includeSpecial === false
-    ) {
-        alert("You must select at least one character type");
-        return null;
+    if (passwordLength === null ||
+        passwordLength === "" ||
+        passwordLength === undefined) {
+        return null
+    } else {
+
+        //prompt to confirm the use of each type of character
+        var includeLowercase = confirm("Click \OK\ to include lowercase letters");
+        var includeUppercase = confirm("Click \OK\ to include Uppercase letters");
+        var includeNumbers = confirm("Click \OK\ to include numbers");
+        var includeSpecial = confirm("Click \OK\ to include special characters");
+
+        //make sure the user selected at least one character type
+        if (
+            includeLowercase === false &&
+            includeUppercase === false &&
+            includeNumbers === false &&
+            includeSpecial === false
+        ) {
+            alert("You must select at least one character type");
+            return null;
+        }
+
+        else {
+
+            //create an object containing all the user choises
+            var userChoices = {
+                passwordLength: passwordLength,
+                includeLowercase: includeLowercase,
+                includeUppercase: includeUppercase,
+                includeNumbers: includeNumbers,
+                includeSpecial: includeSpecial
+            };
+
+            console.log(userChoices);
+            //make sure this function returns all the choices
+            return userChoices;
+        }
     }
 
-    else {
-
-        //create an object containing all the user choises
-        var userChoices = {
-            includeLowercase: includeLowercase,
-            includeUppercase: includeUppercase,
-            includeNumbers: includeNumbers,
-            includeSpecial: includeSpecial
-        };
-
-        console.log(userChoices);
-        //make sure this function returns all the choices
-        return userChoices;
-    }
-
-}
+};
 
 
 
 //primary function: create a new password using all of the input criteria
 function generatePassword() {
 
-    //run the function that gets passord length
-    var passwordLength = getpasswordLength();
 
     //run the function that gets user choices
     var parameters = getuserChoices();
 
     //check to make sure variable have values
-    if (passwordLength === null ||
-        passwordLength === "" ||
-        passwordLength === undefined ||
-        parameters === undefined ||
+    if (parameters === undefined ||
         parameters === null ||
         parameters === "") {
         return null;
@@ -159,7 +165,7 @@ function generatePassword() {
 
     // Pick a random character from within the possibles array 
     //as many times as the password length requires,
-    for (var i = 0; i < passwordLength; i++) {
+    for (var i = 0; i < parameters.passwordLength; i++) {
         var randomCharacter = possible[Math.floor(Math.random() * possible.length)]
         //and add it to the results array.
         result.push(randomCharacter);
@@ -174,7 +180,7 @@ function generatePassword() {
     console.log(result);
     console.log(required);
     return result.join("");
-}
+};
 
 
 // Assignment Code
@@ -187,7 +193,7 @@ function writePassword() {
 
     passwordText.value = password;
 
-}
+};
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
