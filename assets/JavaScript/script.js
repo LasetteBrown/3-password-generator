@@ -10,43 +10,43 @@ var specialChars = ["@", "%", "+", "\\", "/", "'", "!", "#", "$", "^", "?", ":",
 
 // Prompt the user to enter a password length
 function getpasswordLength() {
-    var passwordLength = parseInt(
+    var chosenLength = parseInt(
         prompt("Length of password?")
     );
 
     //allow the cancel button to cancel out of the process
-    if (passwordLength === null || passwordLength === "" || passwordLength === undefined) {
-        return;
+    if (chosenLength === null || chosenLength === "" || chosenLength === undefined) {
+        return null;
     }
 
     //make sure what they entered is a number
-    else if (isNaN(passwordLength)) {
+    else if (isNaN(chosenLength)) {
         alert("Please enter a number between 8 and 128");
-        passwordLength = getpasswordLength();
-        return;
+        chosenLength = getpasswordLength();
+        return null;
     }
 
     //make sure they entered a number greater than 8
-    else if (passwordLength < 8) {
+    else if (chosenLength < 8) {
         alert("Your password must be at least 8 characters long!");
-        passwordLength = getpasswordLength();
-        return;
+        chosenLength = getpasswordLength();
+        return null;
     }
 
     //make sure they entered a number less than 128
-    else if (passwordLength > 128) {
+    else if (chosenLength > 128) {
         alert("Your password cannot be longer than 128 characters!");
-        passwordLength = getpasswordLength();
-        return;
+        chosenLength = getpasswordLength();
+        return null;
     }
 
-    else {
 
-        console.log(passwordLength);
 
-        //make sure the function returns a number equal to the length of the password requested
-        return passwordLength;
-    }
+    console.log(chosenLength);
+
+    //make sure the function returns a number equal to the length of the password requested
+    return chosenLength;
+
 }
 
 //collect the user's choices
@@ -66,7 +66,7 @@ function getuserChoices() {
         includeSpecial === false
     ) {
         alert("You must select at least one character type");
-        return;
+        return null;
     }
 
     else {
@@ -104,7 +104,7 @@ function generatePassword() {
         parameters === undefined ||
         parameters === null ||
         parameters === "") {
-        return;
+        return null;
     }
 
     //based on the user's choices, make an array that contains all possible characters
