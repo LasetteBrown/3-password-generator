@@ -14,8 +14,6 @@ function getpasswordLength() {
 
     //allow the cancel button to cancel out of the process
     if (chosenLength === null) {
-        console.log("nothing's there!");
-        console.log(chosenLength);
 
         return null;
     }
@@ -23,24 +21,23 @@ function getpasswordLength() {
     //make sure what they entered is a number
     else if (isNaN(chosenLength)) {
         alert("Please enter a number between 8 and 128");
-        console.log("wrong value");
-        console.log(chosenLength);
+
         return getpasswordLength();
     }
 
     //make sure they entered a number greater than 8
     else if (chosenLength < 8) {
         alert("Your password must be at least 8 characters long!");
+
         return getpasswordLength();
     }
 
     //make sure they entered a number less than 128
     else if (chosenLength > 128) {
         alert("Your password cannot be longer than 128 characters!");
+
         return getpasswordLength();
     }
-
-
 
     console.log(chosenLength);
 
@@ -58,7 +55,9 @@ function getuserChoices() {
     if (passwordLength === null ||
         passwordLength === "" ||
         passwordLength === undefined) {
+
         return null
+
     } else {
 
         //prompt to confirm the use of each type of character
@@ -75,6 +74,7 @@ function getuserChoices() {
             includeSpecial === false
         ) {
             alert("You must select at least one character type");
+
             return null;
         }
 
@@ -110,7 +110,9 @@ function generatePassword() {
     if (parameters === undefined ||
         parameters === null ||
         parameters === "") {
+
         return null;
+
     }
 
     //based on the user's choices, make an array that contains all possible characters
@@ -128,57 +130,65 @@ function generatePassword() {
 
     //if the user chose lowercase characters,
     if (parameters.includeLowercase === true) {
+
         //add all lowercase characters to the possibles array,
         possible = possible.concat(lowercaseChars);
+
         //and add one random lowercase character to the required array.
         required.push(lowercaseChars[Math.floor(Math.random() * lowercaseChars.length)]);
-        console.log(possible);
     };
 
     //if the user chose upper case characters,
     if (parameters.includeUppercase === true) {
+
         //add all upper case characters to the possibles array,
         possible = possible.concat(uppercaseChars);
+
         //and add one random uppercase character to the required array.
         required.push(uppercaseChars[Math.floor(Math.random() * uppercaseChars.length)]);
-        console.log(possible);
-
     };
 
     //if the user chose numbers,
     if (parameters.includeNumbers === true) {
+
         //add all numbers to the possibles array,
         possible = possible.concat(numericChars);
+
         //and add one random number to the required array.
         required.push(numericChars[Math.floor(Math.random() * numericChars.length)]);
-        console.log(possible);
+
     };
 
     //if the user chose special characters
     if (parameters.includeSpecial === true) {
+
         //include all special characters in the possibles array,
         possible = possible.concat(specialChars);
+
         //and add one random special character to the required array.
         required.push(specialChars[Math.floor(Math.random() * specialChars.length)]);
-        console.log(possible);
+
     };
 
     // Pick a random character from within the possibles array 
     //as many times as the password length requires,
     for (var i = 0; i < parameters.passwordLength; i++) {
+
         var randomCharacter = possible[Math.floor(Math.random() * possible.length)]
+
         //and add it to the results array.
         result.push(randomCharacter);
     };
 
     // Mix in at least one of each guaranteed character in the result
     for (var i = 0; i < required.length; i++) {
+
         result[i] = required[i];
     };
+
     //make the results array into a string of characters
     //and make it the return of this function.
-    console.log(result);
-    console.log(required);
+
     return result.join("");
 };
 

@@ -13,14 +13,23 @@ https://lasettebrown.github.io/3-password-generator/
 
 ## Instructions
 When the page loads, you will see a field for your future password and a button below it that reads “Generate Password”. 
-[insert screenshot]
+
+![Loaded screenshot](https://github.com/LasetteBrown/3-password-generator/issues/1#issuecomment-761002665)
+
 When the “Generate Password” button is clicked, a prompt appears asking how long you want your password to be. Enter a number between 8 and 128. 
-[insert screenshot]
+
+![Length popup screenshot](https://github.com/LasetteBrown/3-password-generator/issues/1#issuecomment-761002979)
+
 Next a prompt will appear asking if you want to include lowercase letters in your password. Click ‘OK’ to confirm that you want to include lowercase letters in your password. Click ‘Cancel’ to exclude lowercase letters from your password.
-[insert screenshot]
+
+![Confirm screenshot](<img width="340" alt="include_lowercase" src="https://user-images.githubusercontent.com/74556384/104744898-ad142480-570a-11eb-9e75-4f34337a973d.png">
+)
+
 Repeat this process for the prompts that ask about uppercase letters, numbers, and special characters. For each one, clicking ‘OK’ will include them and clicking ‘Cancel’ will exclude them.
 After you have made selections for each option, a random string of characters will be displayed in the field. You can now use this as your new password!
-[include screenshot]
+
+![Generated password screenshot](<img width="942" alt="password_appears" src="https://user-images.githubusercontent.com/74556384/104745005-cf0da700-570a-11eb-94ab-5981013afd73.PNG">
+)
 
 
 
@@ -51,17 +60,15 @@ The HTML and CSS for this page were provided by the instruction team at the Univ
 which was also provided by the instruction team.
 
 
+## Thank yous
+
+Thank you to my tutor, Kelling Gowing, and my friend, Eliot Kurfman for helping me debug mycode!
+
+
+
 ## License
 
 The content of this website is copyrighted. Please do not use the content without permission.
-
-
-## Process
-
-
-
-### In Development (As in things I still have to do)
-
 
 © 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
 
