@@ -14,7 +14,9 @@ https://lasettebrown.github.io/3-password-generator/
 ## Instructions
 When the page loads, you will see a field for your future password and a button below it that reads “Generate Password”. 
 
-![Loaded screenshot](https://github.com/LasetteBrown/3-password-generator/issues/1#issuecomment-761002665)
+
+<img width="939" alt="password_generator" src="https://user-images.githubusercontent.com/74556384/104746689-dc2b9580-570c-11eb-8819-7b8d837e17d9.PNG">
+
 
 When the “Generate Password” button is clicked, a prompt appears asking how long you want your password to be. Enter a number between 8 and 128. 
 
