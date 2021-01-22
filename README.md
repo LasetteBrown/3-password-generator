@@ -14,23 +14,24 @@ https://lasettebrown.github.io/3-password-generator/
 ## Instructions
 When the page loads, you will see a field for your future password and a button below it that reads “Generate Password”. 
 
-![Loaded screenshot](https://github.com/LasetteBrown/3-password-generator/issues/1#issuecomment-761002665)
+
+<img width="939" alt="password_generator" src="https://user-images.githubusercontent.com/74556384/104746689-dc2b9580-570c-11eb-8819-7b8d837e17d9.PNG">
+
 
 When the “Generate Password” button is clicked, a prompt appears asking how long you want your password to be. Enter a number between 8 and 128. 
 
-![Length popup screenshot](https://github.com/LasetteBrown/3-password-generator/issues/1#issuecomment-761002979)
+<img width="344" alt="password_length" src="https://user-images.githubusercontent.com/74556384/104746958-2d3b8980-570d-11eb-8f41-f9c774aba20b.png">
+
 
 Next a prompt will appear asking if you want to include lowercase letters in your password. Click ‘OK’ to confirm that you want to include lowercase letters in your password. Click ‘Cancel’ to exclude lowercase letters from your password.
 
-![Confirm screenshot](<img width="340" alt="include_lowercase" src="https://user-images.githubusercontent.com/74556384/104744898-ad142480-570a-11eb-9e75-4f34337a973d.png">
-)
+<img width="338" alt="include_uppercase" src="https://user-images.githubusercontent.com/74556384/104746985-3298d400-570d-11eb-9e3e-41785472a0cd.PNG">
+
 
 Repeat this process for the prompts that ask about uppercase letters, numbers, and special characters. For each one, clicking ‘OK’ will include them and clicking ‘Cancel’ will exclude them.
 After you have made selections for each option, a random string of characters will be displayed in the field. You can now use this as your new password!
 
-![Generated password screenshot](<img width="942" alt="password_appears" src="https://user-images.githubusercontent.com/74556384/104745005-cf0da700-570a-11eb-94ab-5981013afd73.PNG">
-)
-
+<img width="942" alt="password_appears" src="https://user-images.githubusercontent.com/74556384/104746995-36c4f180-570d-11eb-8777-b3f0df95cdf6.PNG">
 
 
 ## Built with
