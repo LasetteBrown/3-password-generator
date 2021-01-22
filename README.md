@@ -62,7 +62,7 @@ which was also provided by the instruction team.
 
 ## Thank yous
 
-Thank you to my tutor, Kelling Gowing, and my friend, Eliot Kurfman for helping me debug mycode!
+Thank you to my tutor, Kelly Gowing, and my friend, Eliot Kurfman for helping me debug mycode!
 
 
 
